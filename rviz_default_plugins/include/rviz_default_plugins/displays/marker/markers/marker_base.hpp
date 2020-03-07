@@ -101,7 +101,7 @@ public:
 
   std::string getStringID()
   {
-    return message_->ns + "/" + std::to_string(message_->id);
+    return static_cast<std::string>(message_->ns) + "/" + std::to_string(message_->id);
   }
 
   // TODO(Martin-Idel-SI): use again when interactive marker is ported

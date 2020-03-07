@@ -159,7 +159,7 @@ void MeshResourceMarker::onNewMessage(
 void MeshResourceMarker::printMeshLoadingError(const MarkerBase::MarkerConstSharedPtr & new_message)
 {
   std::string error = "Mesh resource marker [" + getStringID() + "] could not load [" +
-    new_message->mesh_resource + "]";
+    static_cast<std::string>(new_message->mesh_resource) + "]";
   if (owner_) {
     owner_->setMarkerStatus(getID(), rviz_common::properties::StatusProperty::Error, error);
   }

@@ -111,7 +111,7 @@ private:
   filterData(sensor_msgs::msg::PointCloud2::ConstSharedPtr cloud) const;
 
   bool validateFloatsAtPosition(
-    sensor_msgs::msg::PointCloud2::_data_type::const_iterator position, Offsets offsets) const;
+      const uint8_t* position, Offsets offsets) const;
 
   Offsets determineOffsets(sensor_msgs::msg::PointCloud2::ConstSharedPtr cloud) const;
 };

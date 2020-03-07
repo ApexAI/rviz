@@ -164,6 +164,19 @@ inline bool validateFloats(const std::vector<T> & vec)
   return true;
 }
 
+template<typename T, apex::UnsignedLongT N>
+inline bool validateFloats(const apex::BoundedVector<T, N> & vec)
+{
+  for (auto & vec_element : vec) {
+    if (!validateFloats(vec_element)) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
+
 template<typename T, size_t N>
 inline bool validateFloats(const std::array<T, N> & arr)
 {

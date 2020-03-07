@@ -71,7 +71,6 @@ private:
     message.range_min = 0;
     message.range_max = 11;
     message.ranges = {0.1f, 1.f};
-    message.intensities = {};
 
     publisher_->publish(message);
   }

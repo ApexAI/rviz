@@ -121,28 +121,13 @@ PointCloud2Display::filterData(sensor_msgs::msg::PointCloud2::ConstSharedPtr clo
   filteredData.reserve(cloud->data.size());
 
   Offsets offsets = determineOffsets(cloud);
-  size_t points_to_copy = 0;
-  sensor_msgs::msg::PointCloud2::_data_type::const_iterator copy_start_pos;
+
   for (auto it = cloud->data.begin(); it < cloud->data.end(); it += cloud->point_step) {
     if (validateFloatsAtPosition(it, offsets)) {
-      if (points_to_copy == 0) {
-        copy_start_pos = it;
+      for (size_t i_offset = 0U; i_offset < cloud->point_step; i_offset++) {
+        filteredData.push_back(*(it + i_offset));
       }
-      ++points_to_copy;
-    } else if (points_to_copy > 0) {
-      filteredData.insert(
-        filteredData.end(),
-        copy_start_pos,
-        copy_start_pos + points_to_copy * cloud->point_step);
-      points_to_copy = 0;
     }
-  }
-  // Don't forget to flush what needs to be copied
-  if (points_to_copy > 0) {
-    filteredData.insert(
-      filteredData.end(),
-      copy_start_pos,
-      copy_start_pos + points_to_copy * cloud->point_step);
   }
 
   return filteredData;
@@ -160,7 +145,7 @@ Offsets PointCloud2Display::determineOffsets(
 }
 
 bool PointCloud2Display::validateFloatsAtPosition(
-  sensor_msgs::msg::PointCloud2::_data_type::const_iterator position,
+  const uint8_t* position,
   const Offsets offsets) const
 {
   float x = *reinterpret_cast<const float *>(&*(position + offsets.x));
