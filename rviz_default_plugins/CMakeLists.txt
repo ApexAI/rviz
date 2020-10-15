@@ -70,6 +70,8 @@ find_package(TinyXML REQUIRED)  # provided by tinyxml_vendor
 find_package(urdf REQUIRED)
 find_package(visualization_msgs REQUIRED)
 
+add_compile_options(-w)
+
 # These need to be added in the add_library() call so AUTOMOC detects them.
 set(rviz_default_plugins_headers_to_moc
   include/rviz_default_plugins/displays/camera/camera_display.hpp
