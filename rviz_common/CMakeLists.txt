@@ -71,6 +71,8 @@ set(ROS_DISTRO "ROS 2.0")
 set(OGRE_PLUGIN_PATH "rviz_ogre_vendor")
 configure_file(src/rviz_common/env_config.cpp.in ${ENV_CONFIG_CPP} @ONLY)
 
+add_compile_options(-w)
+
 # These need to be added in the add_library() call so AUTOMOC detects them.
 set(rviz_common_headers_to_moc
   ${ENV_CONFIG_HPP}
