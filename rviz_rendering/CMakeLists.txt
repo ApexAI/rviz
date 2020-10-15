@@ -43,6 +43,8 @@ find_package(eigen3_cmake_module REQUIRED)
 find_package(Eigen3 REQUIRED)
 find_package(resource_retriever REQUIRED)
 
+add_compile_options(-w)
+
 # TODO(wjwwood): this block is to setup the windeployqt tool, could be removed later.
 if(Qt5_FOUND AND WIN32 AND TARGET Qt5::qmake AND NOT TARGET Qt5::windeployqt)
   get_target_property(_qt5_qmake_location Qt5::qmake IMPORTED_LOCATION)
