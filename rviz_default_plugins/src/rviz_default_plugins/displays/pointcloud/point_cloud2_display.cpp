@@ -123,7 +123,9 @@ PointCloud2Display::filterData(sensor_msgs::msg::PointCloud2::ConstSharedPtr clo
   Offsets offsets = determineOffsets(cloud);
 
   for (auto it = cloud->data.begin(); it < cloud->data.end(); it += cloud->point_step) {
-    if (validateFloatsAtPosition(it, offsets)) {
+    // cloud.data is apex::BoundedVector which has proper iterators, not simple pointers.
+    // so dereference and then send pointer to work with function signature
+    if (validateFloatsAtPosition(&(*it), offsets)) {
       for (size_t i_offset = 0U; i_offset < cloud->point_step; i_offset++) {
         filteredData.push_back(*(it + i_offset));
       }
